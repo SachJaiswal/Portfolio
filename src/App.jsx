@@ -10,13 +10,17 @@ import Contact from './components/Contact'
 import Footer from './components/Footer'
 
 function App() {
-  const [darkMode, setDarkMode] = useState(false)
+  // Default to dark mode on first load
+  const [darkMode, setDarkMode] = useState(true)
 
   useEffect(() => {
-    const isDark = localStorage.getItem('darkMode') === 'true'
+    const stored = localStorage.getItem('darkMode')
+    const isDark = stored === null ? true : stored === 'true'
     setDarkMode(isDark)
     if (isDark) {
       document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
     }
   }, [])
 

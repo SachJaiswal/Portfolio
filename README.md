@@ -1,16 +1,75 @@
-# React + Vite
+## Sachin Jaiswal – Developer Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This repository contains the source code for **Sachin Jaiswal’s personal developer portfolio**, built with **React**, **Vite**, and **Tailwind CSS**.  
+The site showcases Sachin’s profile, experience, projects, and skills in a clean, responsive single‑page layout.
 
-Currently, two official plugins are available:
+### Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Framework**: React (with Vite)
+- **Styling**: Tailwind CSS + custom utility classes
+- **Icons & Animations**: `lucide-react`, basic CSS/utility animations
+- **Tooling**: ESLint, PostCSS, Autoprefixer
 
-## React Compiler
+### Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Responsive layout** with sections for Hero, About, Experience, Projects, Skills, and Contact
+- **Sticky navigation bar** with smooth scroll between sections
+- **Dark/Light mode toggle** with preference persisted in `localStorage`
+- **Project and skills cards** with hover effects
+- **Contact section** with email and social links
 
-## Expanding the ESLint configuration
+### Getting Started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+#### 1. Prerequisites
+
+- Node.js (LTS recommended)
+- npm (comes with Node)
+
+#### 2. Install dependencies
+
+```bash
+npm install
+```
+
+#### 3. Run the development server
+
+```bash
+npm run dev
+```
+
+Open the printed local URL (usually `http://localhost:5173`) in your browser.
+
+#### 4. Build for production
+
+```bash
+npm run build
+```
+
+To preview the production build locally:
+
+```bash
+npm run preview
+```
+
+### Project Structure (simplified)
+
+- `src/main.jsx` – React entry point
+- `src/App.jsx` – Root component that wires together all sections
+- `src/components/Navbar.jsx` – Top navigation bar with mobile menu
+- `src/components/Hero.jsx` – Hero / introduction section
+- `src/components/About.jsx` – About section
+- `src/components/Experience.jsx` – Experience timeline
+- `src/components/Projects.jsx` – Featured projects
+- `src/components/Skills.jsx` – Skills & tools
+- `src/components/Contact.jsx` – Contact information and form
+- `src/components/Footer.jsx` – Footer
+- `src/index.css` – Global styles and Tailwind base
+
+### Customization
+
+- Update personal details, links, and text inside the components in `src/components`.
+- Adjust colors, spacing, and typography via Tailwind classes and `index.css`.
+
+### License
+
+This project is intended as a personal portfolio. You may use it as inspiration, but please **do not publish it as-is under your own name** without proper attribution.

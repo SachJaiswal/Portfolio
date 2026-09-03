@@ -10,29 +10,26 @@ import Contact from './components/Contact'
 import Footer from './components/Footer'
 
 function App() {
-  // Default to dark mode on first load
-  const [darkMode, setDarkMode] = useState(true)
+  // Default to dark mode on first load with lazy initialization
+  const [darkMode, setDarkMode] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const stored = localStorage.getItem('darkMode')
+      return stored === null ? true : stored === 'true'
+    }
+    return true
+  })
 
   useEffect(() => {
-    const stored = localStorage.getItem('darkMode')
-    const isDark = stored === null ? true : stored === 'true'
-    setDarkMode(isDark)
-    if (isDark) {
+    if (darkMode) {
       document.documentElement.classList.add('dark')
     } else {
       document.documentElement.classList.remove('dark')
     }
-  }, [])
+    localStorage.setItem('darkMode', darkMode.toString())
+  }, [darkMode])
 
   const toggleDarkMode = () => {
-    const newDarkMode = !darkMode
-    setDarkMode(newDarkMode)
-    localStorage.setItem('darkMode', newDarkMode.toString())
-    if (newDarkMode) {
-      document.documentElement.classList.add('dark')
-    } else {
-      document.documentElement.classList.remove('dark')
-    }
+    setDarkMode((prev) => !prev)
   }
 
   return (

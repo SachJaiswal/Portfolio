@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Mail, Phone, Github, Linkedin, Send } from 'lucide-react'
+import { Mail, Phone, Github, Linkedin, Send, CheckCircle2 } from 'lucide-react'
 import { useState } from 'react'
 
 const Contact = () => {
@@ -8,6 +8,7 @@ const Contact = () => {
     email: '',
     message: ''
   })
+  const [isSubmitted, setIsSubmitted] = useState(false)
 
   const handleChange = (e) => {
     setFormData({
@@ -18,11 +19,11 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    // Handle form submission (e.g., send email or API call)
-    console.log('Form submitted:', formData)
-    // Reset form
+    setIsSubmitted(true)
     setFormData({ name: '', email: '', message: '' })
-    alert('Thank you for your message! I\'ll get back to you soon.')
+    setTimeout(() => {
+      setIsSubmitted(false)
+    }, 6000)
   }
 
   return (
@@ -33,7 +34,7 @@ const Contact = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-3xl md:text-4xl font-bold mb-12"
+          className="text-3xl md:text-4xl font-bold mb-12 text-gray-900 dark:text-white"
         >
           Contact
         </motion.h2>
@@ -49,38 +50,45 @@ const Contact = () => {
           >
             <div>
               <h3 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Let's Connect</h3>
-              <p className="text-gray-700 dark:text-gray-300 mb-8">
-                I'm always interested in hearing about new opportunities, projects, or just having a chat about technology.
+              <p className="text-gray-700 dark:text-gray-300 mb-8 leading-relaxed">
+                I'm always interested in hearing about new opportunities, full-stack projects, or having a chat about software engineering.
               </p>
             </div>
 
             <div className="space-y-4">
               <div className="space-y-1">
-                <p className="text-sm text-gray-600 dark:text-gray-400">Email</p>
+                <p className="text-xs uppercase font-semibold text-gray-500 dark:text-gray-400">Email</p>
                 <a
                   href="mailto:sachinjaiswal382004@gmail.com"
-                  className="text-gray-900 dark:text-white hover:text-accent transition-colors"
+                  className="text-gray-900 dark:text-white hover:text-accent transition-colors font-medium text-sm sm:text-base break-all"
                 >
                   sachinjaiswal382004@gmail.com
                 </a>
               </div>
 
               <div className="space-y-1">
-                <p className="text-sm text-gray-600 dark:text-gray-400">Phone</p>
+                <p className="text-xs uppercase font-semibold text-gray-500 dark:text-gray-400">Phone</p>
                 <a
                   href="tel:+917208741875"
-                  className="text-gray-900 dark:text-white hover:text-accent transition-colors"
+                  className="text-gray-900 dark:text-white hover:text-accent transition-colors font-medium text-sm sm:text-base"
                 >
                   +91-7208741875
                 </a>
               </div>
 
-              <div className="flex gap-4 pt-4">
+              <div className="space-y-1">
+                <p className="text-xs uppercase font-semibold text-gray-500 dark:text-gray-400">Location</p>
+                <p className="text-gray-900 dark:text-white font-medium text-sm sm:text-base">
+                  Mumbai, Maharashtra, India
+                </p>
+              </div>
+
+              <div className="flex gap-3 pt-2">
                 <a
                   href="https://github.com/SachJaiswal"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-4 py-2 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors text-sm font-medium"
+                  className="px-4 py-2 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors text-sm font-medium border border-gray-200 dark:border-gray-700"
                 >
                   GitHub
                 </a>
@@ -88,7 +96,7 @@ const Contact = () => {
                   href="https://www.linkedin.com/in/sachinjaiswal04/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-4 py-2 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors text-sm font-medium"
+                  className="px-4 py-2 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors text-sm font-medium border border-gray-200 dark:border-gray-700"
                 >
                   LinkedIn
                 </a>
@@ -103,8 +111,15 @@ const Contact = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
             onSubmit={handleSubmit}
-            className="space-y-6"
+            className="space-y-5"
           >
+            {isSubmitted && (
+              <div className="p-4 rounded-xl flex items-start gap-3 text-sm bg-emerald-50 text-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
+                <CheckCircle2 className="w-5 h-5 shrink-0 mt-0.5 text-emerald-600 dark:text-emerald-400" />
+                <p className="leading-relaxed">Thank you for your message! I'll get back to you soon.</p>
+              </div>
+            )}
+
             <div>
               <label htmlFor="name" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
                 Name
@@ -116,7 +131,8 @@ const Contact = () => {
                 value={formData.name}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent text-gray-900 dark:text-gray-100"
+                className="w-full px-4 py-3 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent text-gray-900 dark:text-gray-100"
+                placeholder="Your name"
               />
             </div>
 
@@ -131,7 +147,8 @@ const Contact = () => {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent text-gray-900 dark:text-gray-100"
+                className="w-full px-4 py-3 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent text-gray-900 dark:text-gray-100"
+                placeholder="your.email@example.com"
               />
             </div>
 
@@ -145,14 +162,15 @@ const Contact = () => {
                 value={formData.message}
                 onChange={handleChange}
                 required
-                rows="5"
-                className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent text-gray-900 dark:text-gray-100 resize-none"
+                rows="4"
+                className="w-full px-4 py-3 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent text-gray-900 dark:text-gray-100 resize-none"
+                placeholder="Hi Sachin, I'd like to talk about..."
               ></textarea>
             </div>
 
             <button
               type="submit"
-              className="w-full px-6 py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-md hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors duration-300 flex items-center justify-center gap-2 font-medium"
+              className="w-full px-6 py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors duration-300 flex items-center justify-center gap-2 font-medium shadow-sm"
             >
               <Send className="w-5 h-5" />
               Send Message
